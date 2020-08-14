@@ -1,0 +1,42 @@
+{
+  "name": "webpack-package",
+  "version": "0.1.0",
+  "description": "",
+  "scripts": {
+    "test": "jest --colors"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hexlet-boilerplates/webpack-package.git"
+  },
+  "author": "Kirill Mokevnin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hexlet-boilerplates/webpack-package/issues"
+  },
+  "homepage": "https://github.com/hexlet-boilerplates/webpack-package#readme",
+  "jest": {
+    "verbose": true,
+    "testURL": "http://localhost/"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.10.3",
+    "@babel/preset-env": "^7.10.3",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^26.1.0",
+    "babel-loader": "^8.1.0",
+    "debug": "^4.1.1",
+    "eslint": "^7.3.1",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-plugin-babel": "^5.3.0",
+    "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-jest": "^23.17.1",
+    "html-webpack-plugin": "^4.3.0",
+    "jest": "^26.1.0",
+    "jest-cli": "^26.1.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
