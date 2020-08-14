@@ -13,16 +13,24 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  testing:
-    
+  run_linter:
+     name: Run linter
      runs-on: ubuntu-latest
      
      steps:
-       # Run linter
-       - name: Run linter
-         run: make lint
+       - name: Check out Git repository
+         uses: actions/checkout@v2
 
-       # Run test
-       - name: Run tests
-         run: make test
+       - name: Set up Node.js
+         uses: actions/setup-node@v1
+         with:
+          node-version: 12
+          
+       - name: Install Node.js dependencies
+         run: npm install
+
+       - name: Run linters
+         uses: wearerequired/lint-action@v1
+         with:
+          eslint: true
 
