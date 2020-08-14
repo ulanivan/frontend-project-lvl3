@@ -20,9 +20,9 @@ jobs:
      steps:
        # Run linter
        - name: Run linter
-         run: npx eslint .
+         run: make lint
 
        # Run test
        - name: Run tests
-         run: npm test
+         run: make test
 
