@@ -30,7 +30,5 @@ jobs:
          run: npm install
 
        - name: Run linters
-         uses: wearerequired/lint-action@v1
-         with:
-          eslint: true
+         run: make lint
 
