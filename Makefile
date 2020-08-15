@@ -14,4 +14,7 @@ test:
 lint:
 	npx eslint .
 
+commit:
+	git add . && git commit -m "$m"
+
 .PHONY: test
