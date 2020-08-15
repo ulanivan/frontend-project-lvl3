@@ -1,6 +1,6 @@
 # webpack-package
 
-[![github action status](https://github.com/hexlet-boilerplates/webpack-package/workflows/Node%20CI/badge.svg)](https://github.com/hexlet-boilerplates/webpack-package/actions)
+![RSS Reader CI](https://github.com/ulanivan/frontend-project-lvl3/workflows/RSS%20Reader%20CI/badge.svg)
 [![Code Climate](https://codeclimate.com/github/hexlet-boilerplates/webpack-package/badges/gpa.svg)](https://codeclimate.com/github/hexlet-boilerplates/webpack-package)
 
 ## Setup
