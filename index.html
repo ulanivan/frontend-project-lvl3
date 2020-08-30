@@ -3,9 +3,9 @@
   <head>
     <title>RSS Reader</title>
   </head>
-  <body>
-    <div id="app">
-      <div class="jumbotron jumbotron-fluid bg-dark">
+  <body class="d-flex flex-column min-vh-100">
+    <main id="app" class="flex-grow-1">
+      <section class="jumbotron jumbotron-fluid bg-dark">
         <div class="container-xl">
           <div class="row">
             <div class="mx-auto col-md-10 col-lg-8 text-white">
@@ -32,12 +32,26 @@
                     </button>
                 </div>
               </div>
-            </form>
-            <p class="text-muted my-1">Example: https://ru.hexlet.io/lessons.rss</p>
+              </form>
+              <p class="text-muted my-1">Example: https://ru.hexlet.io/lessons.rss</p>
+              <div class="feedback"></div>
           </div>
         </div>
       </div>
-    </div> 
-  </div>
+    </section>
+    <div class="container-xl">
+      <div class="row">
+        <div class="col-md-10 col-lg-8 mx-auto feeds"></div>
+      </div>
+    </div>
+    </main>
+    <footer class="footer border-top py-3 mt-5">
+      <div class="container-xl">
+        <div class="text-center">
+          created by
+          <a href="https://www.github.com/ulanivan" target="_blank">Ivan Ulanovich</a>
+        </div>
+      </div>
+    </footer>
 </body>
 </html>
