@@ -12,7 +12,11 @@
     "testURL": "http://localhost/"
   },
   "dependencies": {
-    "bootstrap": "^4.5.2"
+    "axios": "^0.19.2",
+    "bootstrap": "^4.5.2",
+    "on-change": "^2.1.2",
+    "yup": "^0.29.3",
+    "lodash": "^4.17.20"
   },
   "devDependencies": {
     "@babel/core": "^7.10.3",
