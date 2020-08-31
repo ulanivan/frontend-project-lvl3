@@ -1,3 +1,5 @@
+import i18next from 'i18next';
+
 const renderForm = (state, nodes) => {
   const { input, submitButton } = nodes;
   const formIsValid = state.validationErrors.length === 0;
@@ -10,7 +12,8 @@ const renderForm = (state, nodes) => {
 const getFeedbackContent = (state) => {
   const dispatch = {
     failed: state.validationErrors[0],
-    loaded: 'Rss has been loaded',
+    loading: i18next.t('successfulMessages.feedLoading'),
+    loaded: i18next.t('successfulMessages.feedLoaded'),
   };
   return dispatch[state.processStatus];
 };
