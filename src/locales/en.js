@@ -3,7 +3,7 @@ export default {
     errorsMessages: {
       rssLinkIsRequired: 'Rss url is required',
       invalidUrl: 'This must be a valid URL',
-      linkLoaded: 'This link is already loaded',
+      linkLoaded: 'Rss already exists',
     },
     successfulMessages: {
       feedLoading: 'Loading...',
