@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { uniqueId } from 'lodash';
 
 export default (data) => {
   const parser = new DOMParser();
@@ -6,7 +6,7 @@ export default (data) => {
   const feed = doc.querySelector('channel');
   const feedTitle = feed.querySelector('title').textContent;
   const items = feed.querySelectorAll('item');
-  const id = _.uniqueId();
+  const id = uniqueId();
   const feedItems = [...items].map((item) => {
     const title = item.querySelector('title').textContent;
     const link = item.querySelector('link').textContent;
