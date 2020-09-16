@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { differenceWith, isEqual } from 'lodash';
-import crossProxy from './crossProxy';
+import proxy from './proxy';
 import parseData from './parser';
 
 const updatePosts = (state) => {
   const watchedState = state;
   Promise.all(watchedState.loadedFeeds.map((feed) => {
-    const url = `${crossProxy}${feed.link}`;
+    const url = `${proxy}${feed.link}`;
     return axios.get(url).then((res) => ({
       updatedData: parseData(res.data),
       feedId: feed.id,

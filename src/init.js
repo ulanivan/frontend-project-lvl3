@@ -4,7 +4,7 @@ import i18next from 'i18next';
 import onChange from 'on-change';
 import * as yup from 'yup';
 import parseData from './parser';
-import crossProxy from './crossProxy';
+import proxy from './proxy';
 import updatePosts from './updatePosts';
 import { renderForm, renderFormFeedback, renderListFeeds } from './view';
 import resources from './locales';
@@ -101,7 +101,7 @@ const app = () => {
       watchedState.processStatus = 'failed';
       return;
     }
-    const url = `${crossProxy}${watchedState.form.value}`;
+    const url = `${proxy}${watchedState.form.value}`;
     axios.get(url).then((res) => {
       const data = parseData(res.data);
       const loadedFeedWithLink = { ...data, link: watchedState.form.value };
