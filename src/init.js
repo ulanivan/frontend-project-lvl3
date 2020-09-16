@@ -5,6 +5,7 @@ import onChange from 'on-change';
 import * as yup from 'yup';
 import parseData from './parser';
 import crossProxy from './crossProxy';
+import updatePosts from './updatePosts';
 import { renderForm, renderFormFeedback, renderListFeeds } from './view';
 import resources from './locales';
 
@@ -21,11 +22,12 @@ const schema = yup
   .url(i18next.t('errorsMessages.invalidUrl'))
   .required(i18next.t('errorsMessages.rssLinkIsRequired'));
 const validateRssUrl = (watchedState) => {
+  const loadedLinks = watchedState.loadedFeeds.map((feed) => feed.link);
   try {
     schema.test(
       'check if already loaded',
       i18next.t('errorsMessages.linkLoaded'),
-      (url) => !watchedState.loadedLinks.includes(url),
+      (url) => !loadedLinks.includes(url),
     ).validateSync(watchedState.form.value);
     return [];
   } catch ({ errors }) {
@@ -48,6 +50,10 @@ const dispatchProcessStatuts = {
     renderForm(s, nodes);
     renderFormFeedback(s, nodes);
   },
+  updated: (s, nodes) => {
+    renderListFeeds(s, nodes);
+  },
+  updating: () => '',
 };
 
 const app = () => {
@@ -59,7 +65,7 @@ const app = () => {
     loadedFeeds: [],
     processStatus: 'filling',
     validationErrors: [],
-    loadedLinks: [],
+    updateTime: 5000,
   };
 
   const watchedState = onChange(state, (path, newValue) => {
@@ -72,6 +78,11 @@ const app = () => {
         break;
       case 'processStatus':
         dispatchProcessStatuts[newValue](state, htmlNodes);
+        break;
+      case 'loadedFeeds':
+        if (newValue.length > 0) {
+          updatePosts(watchedState);
+        }
         break;
       default:
         break;
@@ -92,10 +103,10 @@ const app = () => {
     }
     const url = `${crossProxy}${watchedState.form.value}`;
     axios.get(url).then((res) => {
-      watchedState.loadedLinks.push(watchedState.form.value);
-      watchedState.form.value = '';
       const data = parseData(res.data);
-      watchedState.loadedFeeds = [...watchedState.loadedFeeds, data];
+      const loadedFeedWithLink = { ...data, link: watchedState.form.value };
+      watchedState.loadedFeeds = [...watchedState.loadedFeeds, loadedFeedWithLink];
+      watchedState.form.value = '';
       watchedState.processStatus = 'loaded';
     });
   });
