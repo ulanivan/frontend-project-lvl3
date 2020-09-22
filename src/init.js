@@ -21,14 +21,12 @@ const schema = yup
   .string()
   .url(i18next.t('errorsMessages.invalidUrl'))
   .required(i18next.t('errorsMessages.rssLinkIsRequired'));
-const validateRssUrl = (watchedState) => {
-  const loadedLinks = watchedState.loadedFeeds.map((feed) => feed.link);
+
+const validateRssUrl = ({ loadedLinks, value }) => {
   try {
-    schema.test(
-      'check if already loaded',
-      i18next.t('errorsMessages.linkLoaded'),
-      (url) => !loadedLinks.includes(url),
-    ).validateSync(watchedState.form.value);
+    schema
+      .notOneOf(loadedLinks, i18next.t('errorsMessages.linkLoaded'))
+      .validateSync(value);
     return [];
   } catch ({ errors }) {
     return errors;
@@ -94,7 +92,11 @@ const app = () => {
 
   htmlNodes.form.addEventListener('submit', (e) => {
     e.preventDefault();
-    watchedState.validationErrors = validateRssUrl(state);
+    const validateParams = {
+      loadedLinks: watchedState.loadedFeeds.map((feed) => feed.link),
+      value: watchedState.form.value,
+    };
+    watchedState.validationErrors = validateRssUrl(validateParams);
     watchedState.processStatus = 'loading';
     if (watchedState.validationErrors.length > 0) {
       watchedState.processStatus = 'failed';
