@@ -60,7 +60,6 @@ const app = () => {
   const state = {
     form: {
       value: '',
-      validationErrors: [],
     },
     loadedFeeds: [],
     processStatus: 'filling',
