@@ -60,6 +60,7 @@ const app = () => {
       value: '',
     },
     loadedFeeds: [],
+    feedsItems: {},
     processStatus: 'filling',
     validationErrors: [],
     updateTime: 5000,
@@ -81,8 +82,12 @@ const app = () => {
           updatePosts(watchedState);
         }
         break;
-      default:
+      case 'feedsItems':
         break;
+      case 'form.value':
+        break;
+      default:
+        throw new Error(`Unknown state change: '${path}'!`);
     }
   });
 
@@ -104,9 +109,10 @@ const app = () => {
     }
     const url = `${proxy}${watchedState.form.value}`;
     axios.get(url).then((res) => {
-      const data = parseData(res.data);
-      const loadedFeedWithLink = { ...data, link: watchedState.form.value };
-      watchedState.loadedFeeds = [...watchedState.loadedFeeds, loadedFeedWithLink];
+      const { id, feedTitle, feedItems } = parseData(res.data);
+      const loadedFeedWithLink = { id, feedTitle, link: watchedState.form.value };
+      watchedState.loadedFeeds.push(loadedFeedWithLink);
+      watchedState.feedsItems = { ...watchedState.feedItems, [id]: { items: feedItems } };
       watchedState.form.value = '';
       watchedState.processStatus = 'loaded';
     });

@@ -14,13 +14,13 @@ const updatePosts = (state) => {
   }))
     .then((res) => {
       res.forEach(({ updatedData, feedId }) => {
-        const [currentFeed] = watchedState.loadedFeeds.filter((f) => f.id === feedId);
+        const currentFeedItems = watchedState.feedsItems[feedId].items;
         const diff = differenceWith(
           updatedData.feedItems,
-          currentFeed.feedItems,
+          currentFeedItems,
           isEqual,
         );
-        currentFeed.feedItems = diff;
+        watchedState.feedsItems = { ...watchedState.feedsItems, [feedId]: { items: diff } };
         watchedState.processStatus = 'updated';
       });
     })

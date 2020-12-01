@@ -32,10 +32,11 @@ const renderFormFeedback = (state, nodes) => {
 const renderListFeeds = (state, nodes) => {
   const { feedsListContainer } = nodes;
   feedsListContainer.innerHTML = '';
-  state.loadedFeeds.forEach(({ feedTitle, feedItems }) => {
+  state.loadedFeeds.forEach(({ feedTitle, id }) => {
     const titleTag = document.createElement('h2');
     titleTag.textContent = feedTitle;
     feedsListContainer.append(titleTag);
+    const feedItems = state.feedsItems[id].items;
     feedItems.forEach(({ title, link }) => {
       const feedListItem = document.createElement('div');
       const htmlLink = document.createElement('a');
